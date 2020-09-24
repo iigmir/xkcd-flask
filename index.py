@@ -1,11 +1,16 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import requests
+import re
 
 app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    return render_template("f2e.html")
+    is_json_request = re.search("json", request.headers.get("Accept"))
+    if is_json_request:
+        return get_tasks()
+    else:
+        return render_template("f2e.html")
 
 @app.route("/api", methods=["GET"])
 @app.route("/api/<id>", methods=["GET"])

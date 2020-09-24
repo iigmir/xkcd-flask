@@ -16,6 +16,8 @@ def hello_world():
 @app.route("/api/<id>", methods=["GET"])
 def get_tasks(id=None):
     # Varaibles
+    # Python has issues about objects:
+    # "TypeError: Object of type method is not JSON serializable" is you add the by a object.
     if id is None:
         id_api = ""
         explain = "https://www.explainxkcd.com"
